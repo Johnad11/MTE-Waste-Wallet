@@ -151,15 +151,8 @@
         </div>
       </div>
       
-      <!-- Back Button -->
-      <div class="mt-6 text-center">
-        <button 
-          onclick="app.hideSupportModal(); app.navigate(app.loggedInUser ? 'dashboard' : 'landing');"
-          class="text-sm font-medium text-gray-500 hover:text-gray-700"
-        >
-          Back to ${app.loggedInUser ? 'Dashboard' : 'Home'}
-        </button>
-      </div>
+      <!-- Back Button - REMOVED -->
+      <!-- The user can close the modal using the 'X' button or click outside -->
     </div>
   </div>
 
@@ -323,6 +316,13 @@
         void modal.offsetWidth; 
         modal.classList.remove('opacity-0');
         modal.querySelector('div').classList.remove('scale-95');
+
+        // Allow closing modal by clicking the backdrop
+        modal.onclick = (event) => {
+            if (event.target === modal) {
+                this.hideSupportModal();
+            }
+        };
       },
 
       hideSupportModal() {
@@ -332,6 +332,7 @@
         // Hide fully after transition completes
         setTimeout(() => {
             modal.classList.add('hidden');
+            modal.onclick = null; // Clean up backdrop listener
         }, 300);
       },
 
@@ -517,7 +518,7 @@
             <!-- Our Mission Section --><div class="bg-white p-8 rounded-lg shadow-lg">
               <h3 class="text-2xl font-bold text-emerald-700 text-center mb-4">Our Mission: A Cleaner Nigeria</h3>
               <p class="text-gray-600 text-center max-w-2xl mx-auto">
-                We're tackling **SDG 11: Sustainable Cities and Communities**. Our goal is to reduce landfill waste, keep our neighborhoods clean, and empower local collectors by providing them with reliable, direct access to jobs.
+                We're tackling <strong>SDG 11: Sustainable Cities and Communities</strong>. Our goal is to reduce landfill waste, keep our neighborhoods clean, and empower local collectors by providing them with reliable, direct access to jobs.
               </p>
             </div>
 
@@ -530,7 +531,7 @@
                     <span class="flex-shrink-0 bg-emerald-500 text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-sm">1</span>
                     <div>
                       <h5 class="font-semibold">Sort & Scan</h5>
-                      <p class="text-gray-500 text-sm">Use our **SmartScan** AI feature to instantly identify items and learn the correct recycling bin.</p>
+                      <p class="text-gray-500 text-sm">Use our <strong>SmartScan</strong> AI feature to instantly identify items and learn the correct recycling bin.</p>
                     </div>
                   </li>
                   <li class="flex items-start gap-3">
